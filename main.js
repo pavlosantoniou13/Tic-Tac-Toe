@@ -1,5 +1,5 @@
 let circleTurn
-let remainingSpots = 9
+let remainingSpots = 7
 
 const Player = (name, symbol) => {
     return{name, symbol}
@@ -55,7 +55,6 @@ const Player = (name, symbol) => {
     makeRows(3, 3);
     
     function handleClick(e) {
-        console.log(this.index)
         //placeMark
         
         const cell = e.target
@@ -64,11 +63,12 @@ const Player = (name, symbol) => {
         //if(checkWin(currentPlayer)){
        //     console.log("winner")
        // }
-       if (remainingSpots == 2) {
+       if (remainingSpots <= 0) {
         winningMessage.textContent = "Draw"
        }
 
        checkDraw()
+
        if(checkWin(currentPlayer)){
          if(currentPlayer == player1.symbol) {
             winningMessage.textContent = "Player X Wins!"
@@ -86,17 +86,18 @@ const Player = (name, symbol) => {
         switchTurns()
     }
    
-    function kati(){
-        remainingSpots--
-        console.log(remainingSpots)
-    }
+    
 
    function checkDraw(){
     cellElements.forEach(element => {
         element.addEventListener("click",kati)
     });
    }
-   
+
+   function kati(){
+        remainingSpots--
+        console.log(remainingSpots)
+    }
 
     function switchTurns(){
         circleTurn = !circleTurn
@@ -116,5 +117,20 @@ const Player = (name, symbol) => {
           })
         })
     }
+
+    function resetGame(){
+        winningMessage.textContent = ""
+        cellElements.forEach(element => {
+            element.textContent = ""
+            gameBoardObject.gameBoard = [0, 0, 0,
+            0, 0, 0,
+            0, 0, 0]
+            remainingSpots = 9
+            element.addEventListener('click',handleClick, { once: true})
+            
+        })
+       
+    }
     
+  
     const winningMessage = document.querySelector(".winning-message")

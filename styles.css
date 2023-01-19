@@ -47,6 +47,17 @@
 
 .Reset {
     margin-top: 30px;
+    color: white;
+    font-weight: 500;
+    background-color: black;
+    width: 75px;
+    height: 30px;
+    border-radius: 15px;
+    border: none;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-weight: 800;
 }
 
 .winning-message {
