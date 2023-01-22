@@ -1,5 +1,5 @@
 let circleTurn
-let remainingSpots = 7
+let remainingSpots;
 
 const Player = (name, symbol) => {
     return{name, symbol}
@@ -48,7 +48,7 @@ const Player = (name, symbol) => {
           cell.addEventListener('click',handleClick, { once: true})
           
         }
-        
+        remainingSpots = 7
         cellElements = document.querySelectorAll(".grid-item")
     };
     
@@ -63,11 +63,13 @@ const Player = (name, symbol) => {
         //if(checkWin(currentPlayer)){
        //     console.log("winner")
        // }
+       
+
        if (remainingSpots <= 0) {
         winningMessage.textContent = "Draw"
        }
 
-       checkDraw()
+       
 
        if(checkWin(currentPlayer)){
          if(currentPlayer == player1.symbol) {
@@ -83,6 +85,7 @@ const Player = (name, symbol) => {
         //Check for Draw
         
         //Switch Turns
+        checkDraw()
         switchTurns()
     }
    
@@ -90,7 +93,7 @@ const Player = (name, symbol) => {
 
    function checkDraw(){
     cellElements.forEach(element => {
-        element.addEventListener("click",kati)
+        element.addEventListener("click",kati, { once: true})
     });
    }
 
@@ -125,7 +128,7 @@ const Player = (name, symbol) => {
             gameBoardObject.gameBoard = [0, 0, 0,
             0, 0, 0,
             0, 0, 0]
-            remainingSpots = 9
+            remainingSpots = 8
             element.addEventListener('click',handleClick, { once: true})
             
         })
