@@ -1,6 +1,4 @@
 const winningMessage = document.querySelector(".winning-message")
-
-
 let circleTurn
 let remainingSpots;
 
@@ -32,7 +30,6 @@ const Player = (name, symbol) => {
         [2, 4, 6]
     ]
     
-    
     const container = document.querySelector(".board");
     function makeRows(rows, cols) {
         container.style.setProperty('--grid-rows', rows);
@@ -57,26 +54,15 @@ const Player = (name, symbol) => {
     
     makeRows(3, 3);
 
-    
-    
     function handleClick(e) {
-        //placeMark
-        
         const cell = e.target
         const currentPlayer =  circleTurn ? player1.symbol : player2.symbol
         placeMark(cell, currentPlayer)
-        //checkDraw()
         checkDraw()
-        //if(checkWin(currentPlayer)){
-       //     console.log("winner")
-       // }
-       
-
+        
        if (remainingSpots <= 0) {
         winningMessage.textContent = "Draw"
        }
-
-       
 
        if(checkWin(currentPlayer)){
          if(currentPlayer == player1.symbol) {
@@ -85,23 +71,21 @@ const Player = (name, symbol) => {
             winningMessage.textContent = "Player O Wins!"
          }
         }
-       
 
-        
-        //Check For Win
-        //Check for Draw
-        
-        //Switch Turns
-        
         switchTurns()
+
+        stopGame()
+
     }
    
-
-    //function checkDraw(){
-       // cellElements.forEach(element => {
-       //     element.addEventListener("click",kati, { once: true})
-       // });
-    //}
+    function stopGame() {
+        if(winningMessage.textContent !== "") {
+            cellElements.forEach(element => {
+                element.removeEventListener('click',handleClick, { once: true})
+                
+            })
+        }
+    }
 
    function checkDraw(){
         remainingSpots--
@@ -114,8 +98,6 @@ const Player = (name, symbol) => {
     
     function placeMark(cell, currentPlayer){
         cell.textContent = currentPlayer
-        //gameBoardObject.gameBoard.push(cell.id)
-        //console.log(gameBoardObject.gameBoard)
         gameBoardObject.gameBoard[cell.id]=currentPlayer;  
     }
     
