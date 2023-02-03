@@ -1,3 +1,6 @@
+const winningMessage = document.querySelector(".winning-message")
+
+
 let circleTurn
 let remainingSpots;
 
@@ -48,11 +51,13 @@ const Player = (name, symbol) => {
           cell.addEventListener('click',handleClick, { once: true})
           
         }
-        remainingSpots = 7
+        remainingSpots = 9
         cellElements = document.querySelectorAll(".grid-item")
     };
     
     makeRows(3, 3);
+
+    
     
     function handleClick(e) {
         //placeMark
@@ -60,6 +65,8 @@ const Player = (name, symbol) => {
         const cell = e.target
         const currentPlayer =  circleTurn ? player1.symbol : player2.symbol
         placeMark(cell, currentPlayer)
+        //checkDraw()
+        checkDraw()
         //if(checkWin(currentPlayer)){
        //     console.log("winner")
        // }
@@ -85,19 +92,18 @@ const Player = (name, symbol) => {
         //Check for Draw
         
         //Switch Turns
-        checkDraw()
+        
         switchTurns()
     }
    
-    
+
+    //function checkDraw(){
+       // cellElements.forEach(element => {
+       //     element.addEventListener("click",kati, { once: true})
+       // });
+    //}
 
    function checkDraw(){
-    cellElements.forEach(element => {
-        element.addEventListener("click",kati, { once: true})
-    });
-   }
-
-   function kati(){
         remainingSpots--
         console.log(remainingSpots)
     }
@@ -128,7 +134,7 @@ const Player = (name, symbol) => {
             gameBoardObject.gameBoard = [0, 0, 0,
             0, 0, 0,
             0, 0, 0]
-            remainingSpots = 8
+            remainingSpots = 9
             element.addEventListener('click',handleClick, { once: true})
             
         })
@@ -136,4 +142,3 @@ const Player = (name, symbol) => {
     }
     
   
-    const winningMessage = document.querySelector(".winning-message")
